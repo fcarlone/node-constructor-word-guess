@@ -3,12 +3,26 @@ const inquirer = require('inquirer');
 
 const wordsArray = ['one', 'second', 'three', 'number four'];
 let newWord = '';
-
+let testWord = '';
+let questionNumber = 1;
+console.log("Answer Three Questions")
+console.log(`Question Number ${questionNumber}`)
 
 const selectWord = (arr) => {
-  let randomNumber = Math.floor(Math.random() * arr.length);
-  console.log(randomNumber)
-  newWord = arr[randomNumber];
+  if (questionNumber > 3) {
+    console.log('ALL DONE. SHOW SCORE')
+  } else {
+    let randomNumber = Math.floor(Math.random() * arr.length);
+    // console.log(randomNumber)
+
+    newWord = arr[randomNumber];
+    testWord = new Word(newWord);
+    // console.log('Word to guess:', newWord)
+    testWord.addChars(newWord)
+    // console.log(testWord)
+    console.log('Invoke handleInquirer function');
+    handleInquirer()
+  }
 };
 
 const handleQuestion = () => {
@@ -25,7 +39,11 @@ const handleQuestion = () => {
     console.log('run inquirer again')
     handleInquirer()
   } else {
-    console.log('all true... do something')
+    console.log('all true... do something');
+    questionNumber += 1;
+    console.log('Question:', questionNumber)
+    console.log('Select new word')
+    selectWord(wordsArray);
   }
 };
 
@@ -37,16 +55,22 @@ const handleInquirer = () => {
       {
         type: "input",
         message: "Guess a letter",
-        name: "userLetter"
+        name: "userLetter",
+        validate: function validateUserLetter(name) {
+          return name !== '';
+        },
+        validate: function validateLength(name) {
+          return name.length === 1;
+        }
       }
     ])
     .then(answers => {
       // Use user feedback for... whatever!!
       let userQuess = answers.userLetter;
-      console.log('Letter Guessed', userQuess)
+      // console.log('Letter Guessed', userQuess)
       testWord.checkLetter(userQuess)
-      console.log(testWord.wordArray)
-      console.log('Check response')
+      // console.log(testWord.wordArray)
+      // console.log('Check response')
       return handleQuestion()
     });
 }
@@ -54,12 +78,7 @@ const handleInquirer = () => {
 
 // TEST Word
 selectWord(wordsArray)
-console.log('Word to guess:', newWord)
-let testWord = new Word(newWord);
-testWord.addChars(newWord)
-console.log(testWord)
-console.log('Invoke handleInquirer function');
-handleInquirer()
+
 
 
 

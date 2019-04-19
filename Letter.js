@@ -1,5 +1,3 @@
-
-
 // Function constructor
 function Letter(char) {
   this.char = char;
