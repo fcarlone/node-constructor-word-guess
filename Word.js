@@ -24,17 +24,20 @@ class Word {
     })
     // checkGuess(userGuess)
 
-    console.log(this.wordArray)
+    // console.log(this.wordArray)
 
   }
 };
 
-let testWord = new Word('test');
-testWord.addChars('test')
+module.exports = Word
 
-console.log(testWord.wordArray)
+// let testWord = new Word('test');
+// testWord.addChars('test')
+
+// console.log(testWord.wordArray)
 // testWord.checkLetter('e')
 // testWord.checkLetter('t')
 // console.log(testWord.wordArray)
 
 // console.log(testWord)
+

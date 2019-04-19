@@ -1,21 +1,16 @@
-// Function 
+
+
+// Function constructor
 function Letter(char) {
   this.char = char;
   this.correctGuess = false;
-  // Functions
-  // this.toString = function () {
-  //   this.correctGuess ? console.log(this.char) : console.log('_');
-  // };
-
-  // this.checkGuess = function (userGuess) {
-  //   if (userGuess === this.char) {
-  //     this.correctGuess = true;
-  //   }
-  // }
 };
 
 Letter.prototype.toString = function () {
+
   this.correctGuess ? console.log(this.char) : console.log('_');
+  // this.correctGuess ? wordDisplay += this.char + ' ' : wordDisplay += '_ ';
+  // console.log(wordDisplay)
 };
 
 Letter.prototype.checkGuess = function (userGuess) {
