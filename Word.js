@@ -15,10 +15,12 @@ class Word {
     })
   }
   checkLetter(userGuess) {
-    console.log(userGuess)
+    // console.log(userGuess)
     // console.log(this.wordArray.this.checkGuess(userGuess))
     this.wordArray.forEach((char) => {
+
       char.checkGuess(userGuess)
+      char.toString()
     })
     // checkGuess(userGuess)
 
@@ -31,8 +33,8 @@ let testWord = new Word('test');
 testWord.addChars('test')
 
 console.log(testWord.wordArray)
-testWord.checkLetter('t')
-
+// testWord.checkLetter('e')
+// testWord.checkLetter('t')
 // console.log(testWord.wordArray)
 
 // console.log(testWord)
