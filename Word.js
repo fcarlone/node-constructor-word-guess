@@ -1,3 +1,4 @@
+const colors = require('colors/safe');
 // Requre Letter.js
 const Letter = require("./Letter.js");
 
@@ -20,7 +21,7 @@ class Word {
       char.checkGuess(userGuess)
       display.push(char.toString());
     })
-    console.log(display.join(' '));
+    console.log(colors.black.bgWhite(' ' + (display.join(' ') + ' \n')));
   }
 };
 

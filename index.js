@@ -1,100 +1,132 @@
 const Word = require('./Word.js');
 const inquirer = require('inquirer');
+const colors = require('colors/safe');
 
 const wordsArray = ['one', 'second', 'three', 'number four', 'the number is five'];
+let usedWordsArray = [];
 let newWord = '';
 let testWord = '';
+let correctRepsonses = 0;
+let wrongResponses = 0;
 let questionNumber = 1;
 let quessesRemaining = 10;
 
-console.log("Answer Three Questions")
+console.log(colors.bold("\n\n**** Answer Three Questions ****"));
 
-
+// Select a word from the wordsArray
 const selectWord = (arr) => {
+  // Check questions count 
   if (questionNumber > 3) {
-    console.log('ALL DONE. SHOW SCORE')
+    // Three questions was submitted - tally results;
+    console.log('\nALL DONE. HERE IS YOUR FINAL SCORE.\n');
+    finalScore();
   } else {
-    quessesRemaining = 10;
+    // Select random word from wordsArray
     let randomNumber = Math.floor(Math.random() * arr.length);
-    // console.log(randomNumber)
-    console.log(`Question Number ${questionNumber}`)
     newWord = arr[randomNumber];
-    testWord = new Word(newWord);
-    // console.log('Word to guess:', newWord)
-
-
-    testWord.addChars(newWord)
-    testWord.checkLetter(" ")
-    // console.log(testWord)
-    console.log('Invoke handleInquirer function');
-
-    handleInquirer()
+    // Check if word was already used
+    if (usedWordsArray.includes(newWord)) {
+      // Word was already used - call the selectWord function again
+      selectWord(wordsArray);
+    } else {
+      // Ok to use the word
+      // Reset the number of wrong guesses allowed
+      quessesRemaining = 10;
+      console.log(colors.bold.underline(`\nQuestion Number ${questionNumber}\n\n`));
+      // Push the word into the usedWordsArray
+      usedWordsArray.push(newWord);
+      // Word constructor
+      testWord = new Word(newWord);
+      // Run Word constructor functions
+      testWord.addChars(newWord);
+      testWord.checkLetter(" ");
+      // Invoke Inquirer - ask user to select a letter
+      handleInquirer()
+    }
   }
 };
-
-const handleQuestion = () => {
-  console.log('handleQuestion function')
-  correctGuessArray = [];
-  let testArray = testWord.wordArray
-  console.log('testarray', testArray)
-  testArray.forEach((obj) => {
-    correctGuessArray.push(obj.correctGuess)
-  });
-  console.log(correctGuessArray)
-  if (correctGuessArray.includes(false)) {
-    console.log('run inquirer again')
-    handleInquirer()
-  } else {
-    console.log('all true... do something');
-    questionNumber += 1;
-    // console.log('Question:', questionNumber)
-    console.log('Select new word')
-    selectWord(wordsArray);
-  }
-};
-
 
 // Inquirer
 const handleInquirer = () => {
-  console.log(`Number of wrong guesses remaining: ${quessesRemaining}`)
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        message: "Guess a letter",
-        name: "userLetter",
-        validate: function validateUserLetter(name) {
-          return name !== '';
-        },
-        validate: function validateLength(name) {
-          return name.length === 1;
+  // Check the number of guesses left
+  console.log('guess count in Inquirer', quessesRemaining);
+  if (quessesRemaining <= 0) {
+    console.log("Message to user - no more guesses remaining");
+    // Increase wrongResponses count by one
+    wrongResponses += 1;
+    // Increase questions count by one
+    questionNumber += 1;
+    // Select new word;
+    selectWord(wordsArray);
+  } else {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Guess a letter",
+          name: "userLetter",
+          validate: function validateUserLetter(name) {
+            return name !== '';
+          },
+          validate: function validateLength(name) {
+            return name.length === 1;
+          }
         }
-      }
-    ])
-    .then(answers => {
-      // Use user feedback for... whatever!!
-      let userQuess = answers.userLetter;
-      console.log('Letter Guessed', userQuess)
-      console.log('NewWord', newWord)
-      if (newWord.includes(userQuess)) {
-        console.log('CORRECT')
-      } else {
-        quessesRemaining--
-        console.log('INCORRECT')
-      }
-
-      testWord.checkLetter(userQuess)
-
-
-      // console.log(testWord.wordArray)
-      // console.log('Check response')
-      return handleQuestion()
-    });
-
+      ])
+      .then(answers => {
+        let userQuess = answers.userLetter;
+        // Check user input against word
+        if (newWord.includes(userQuess)) {
+          console.log(colors.green.bold('\nCORRECT'));
+          console.log(colors.bold(`Number of wrong guesses remaining: ${quessesRemaining}\n`))
+        } else {
+          // decrement the number of remaining guesses
+          quessesRemaining--
+          console.log('')
+          console.log(colors.red.bold('\nINCORRECT'));
+          console.log(colors.bold(`Number of wrong guesses remaining: ${quessesRemaining}\n`))
+        }
+        // Word constructor funcion checkLetter to display letter/underscore 
+        // and invoke Letter constructor function checkGuess to flip correctGuess property to "True"
+        testWord.checkLetter(userQuess)
+        // Invoke Inquirer - ask user to select a letter
+        return handleQuestion()
+      });
+  }
 }
 
+const handleQuestion = () => {
+  // Array to store True/False value for each letter
+  correctGuessArray = [];
+  let testArray = testWord.wordArray
+  // Loop through word and store True/False value for each letter
+  testArray.forEach((obj) => {
+    correctGuessArray.push(obj.correctGuess)
+  });
+  // Check values of correctGuesses Array
+  // if array contains a "False" value - keep going
+  if (correctGuessArray.includes(false)) {
+    // Invoke Inquirer - ask user to select a letter
+    handleInquirer()
+  } else {
+    // If array contains all "True" values - increase question count 
+    // and move to the next word by invoking selectWord()
+    questionNumber += 1;
+    // Increase correctRepsonses count by one
+    correctRepsonses += 1;
+    // Select a new word
+    selectWord(wordsArray);
+  };
+};
 
-// TEST Word
+// Tally final score
+const finalScore = () => {
+  console.log('invoke final score');
+  console.log('correctRepsonses count', correctRepsonses)
+  console.log('wrongRepsonses count', wrongResponses)
+};
+
+// Start application
 selectWord(wordsArray)
 
 
