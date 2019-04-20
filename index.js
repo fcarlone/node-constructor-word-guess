@@ -1,26 +1,33 @@
 const Word = require('./Word.js');
 const inquirer = require('inquirer');
 
-const wordsArray = ['one', 'second', 'three', 'number four'];
+const wordsArray = ['one', 'second', 'three', 'number four', 'the number is five'];
 let newWord = '';
 let testWord = '';
 let questionNumber = 1;
+let quessesRemaining = 10;
+
 console.log("Answer Three Questions")
-console.log(`Question Number ${questionNumber}`)
+
 
 const selectWord = (arr) => {
   if (questionNumber > 3) {
     console.log('ALL DONE. SHOW SCORE')
   } else {
+    quessesRemaining = 10;
     let randomNumber = Math.floor(Math.random() * arr.length);
     // console.log(randomNumber)
-
+    console.log(`Question Number ${questionNumber}`)
     newWord = arr[randomNumber];
     testWord = new Word(newWord);
     // console.log('Word to guess:', newWord)
+
+
     testWord.addChars(newWord)
+    testWord.checkLetter(" ")
     // console.log(testWord)
     console.log('Invoke handleInquirer function');
+
     handleInquirer()
   }
 };
@@ -29,8 +36,7 @@ const handleQuestion = () => {
   console.log('handleQuestion function')
   correctGuessArray = [];
   let testArray = testWord.wordArray
-  console.log('testarray', testArray)
-
+  // console.log('testarray', testArray)
   testArray.forEach((obj) => {
     correctGuessArray.push(obj.correctGuess)
   });
@@ -41,7 +47,7 @@ const handleQuestion = () => {
   } else {
     console.log('all true... do something');
     questionNumber += 1;
-    console.log('Question:', questionNumber)
+    // console.log('Question:', questionNumber)
     console.log('Select new word')
     selectWord(wordsArray);
   }
@@ -50,6 +56,7 @@ const handleQuestion = () => {
 
 // Inquirer
 const handleInquirer = () => {
+  console.log(`Number of guesses remaining: ${quessesRemaining}`)
   inquirer
     .prompt([
       {
@@ -73,6 +80,7 @@ const handleInquirer = () => {
       // console.log('Check response')
       return handleQuestion()
     });
+  quessesRemaining--
 }
 
 

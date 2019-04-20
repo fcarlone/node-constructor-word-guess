@@ -5,19 +5,16 @@ function Letter(char) {
 };
 
 Letter.prototype.toString = function () {
-
   this.correctGuess ? console.log(this.char) : console.log('_');
-  // this.correctGuess ? wordDisplay += this.char + ' ' : wordDisplay += '_ ';
-  // console.log(wordDisplay)
 };
 
 Letter.prototype.checkGuess = function (userGuess) {
   if (userGuess === this.char) {
     this.correctGuess = true;
   }
-}
+};
 
-// Test contructor function
+// TEST
 // let testChar = new Letter('m')
 // console.log(testChar)
 // testChar.checkGuess('l')

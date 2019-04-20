@@ -15,22 +15,16 @@ class Word {
     })
   }
   checkLetter(userGuess) {
-    // console.log(userGuess)
-    // console.log(this.wordArray.this.checkGuess(userGuess))
     this.wordArray.forEach((char) => {
-
       char.checkGuess(userGuess)
       char.toString()
     })
-    // checkGuess(userGuess)
-
-    // console.log(this.wordArray)
-
   }
 };
 
 module.exports = Word
 
+// TEST
 // let testWord = new Word('test');
 // testWord.addChars('test')
 
