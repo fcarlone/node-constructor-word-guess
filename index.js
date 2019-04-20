@@ -56,7 +56,7 @@ const handleQuestion = () => {
 
 // Inquirer
 const handleInquirer = () => {
-  console.log(`Number of guesses remaining: ${quessesRemaining}`)
+  console.log(`Number of wrong guesses remaining: ${quessesRemaining}`)
   inquirer
     .prompt([
       {
@@ -74,13 +74,23 @@ const handleInquirer = () => {
     .then(answers => {
       // Use user feedback for... whatever!!
       let userQuess = answers.userLetter;
-      // console.log('Letter Guessed', userQuess)
+      console.log('Letter Guessed', userQuess)
+      console.log('NewWord', newWord)
+      if (newWord.includes(userQuess)) {
+        console.log('CORRECT')
+      } else {
+        quessesRemaining--
+        console.log('INCORRECT')
+      }
+
       testWord.checkLetter(userQuess)
+
+
       // console.log(testWord.wordArray)
       // console.log('Check response')
       return handleQuestion()
     });
-  quessesRemaining--
+
 }
 
 
