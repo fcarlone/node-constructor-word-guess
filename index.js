@@ -36,7 +36,7 @@ const handleQuestion = () => {
   console.log('handleQuestion function')
   correctGuessArray = [];
   let testArray = testWord.wordArray
-  // console.log('testarray', testArray)
+  console.log('testarray', testArray)
   testArray.forEach((obj) => {
     correctGuessArray.push(obj.correctGuess)
   });
@@ -98,14 +98,9 @@ const handleInquirer = () => {
 selectWord(wordsArray)
 
 
-
-
-
-
 // let checkWord = new Word();
 
 // console.log(checkWord.addChars(newWord))
-
 
 
 // checkWord.checkLetter('e')

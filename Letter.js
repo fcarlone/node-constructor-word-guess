@@ -5,7 +5,7 @@ function Letter(char) {
 };
 
 Letter.prototype.toString = function () {
-  this.correctGuess ? console.log(this.char) : console.log('_');
+  return this.correctGuess ? this.char : '_';
 };
 
 Letter.prototype.checkGuess = function (userGuess) {

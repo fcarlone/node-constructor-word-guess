@@ -15,10 +15,12 @@ class Word {
     })
   }
   checkLetter(userGuess) {
+    let display = [];
     this.wordArray.forEach((char) => {
       char.checkGuess(userGuess)
-      char.toString()
+      display.push(char.toString());
     })
+    console.log(display.join(' '));
   }
 };
 
