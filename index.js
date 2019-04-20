@@ -18,7 +18,7 @@ const selectWord = (arr) => {
   // Check questions count 
   if (questionNumber > 3) {
     // Three questions was submitted - tally results;
-    console.log('\nALL DONE. HERE IS YOUR FINAL SCORE.\n');
+    console.log(colors.bold('\n  ALL DONE. HERE IS YOUR FINAL SCORE.\n'));
     finalScore();
   } else {
     // Select random word from wordsArray
@@ -74,7 +74,7 @@ const handleInquirer = () => {
         }
       ])
       .then(answers => {
-        let userQuess = answers.userLetter;
+        let userQuess = answers.userLetter.toLowerCase();
         // Convert word to lowercase 
         let lowerCaseWord = newWord.toLowerCase();
         // Check user input against word
@@ -95,7 +95,7 @@ const handleInquirer = () => {
         return handleQuestion()
       });
   }
-}
+};
 
 const handleQuestion = () => {
   // Array to store True/False value for each letter
@@ -123,9 +123,16 @@ const handleQuestion = () => {
 
 // Tally final score
 const finalScore = () => {
-  console.log('invoke final score');
-  console.log('correctRepsonses count', correctRepsonses)
-  console.log('wrongRepsonses count', wrongResponses)
+  console.log("***************************************")
+  // console.log('invoke final score');
+  // console.log('correctRepsonses count', correctRepsonses)
+  // console.log('wrongResponses count', wrongResponses)
+  console.log("*                                     *")
+  console.log(`*  Questions Answered Correctly:   ${correctRepsonses}  *`);
+  console.log("*                                     *")
+  console.log(`*  Questions Answered Incorrectly: ${wrongResponses}  *`);
+  console.log("*                                     *")
+  console.log("***************************************\n\n")
 };
 
 // Start application
