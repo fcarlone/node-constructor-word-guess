@@ -9,7 +9,7 @@ Letter.prototype.toString = function () {
 };
 
 Letter.prototype.checkGuess = function (userGuess) {
-  if (userGuess === this.char) {
+  if (userGuess === this.char.toLowerCase()) {
     this.correctGuess = true;
   }
 };

@@ -2,7 +2,7 @@ const Word = require('./Word.js');
 const inquirer = require('inquirer');
 const colors = require('colors/safe');
 
-const wordsArray = ['one', 'second', 'three', 'number four', 'the number is five'];
+const wordsArray = ['One', 'Second', 'Three', 'Number Four', 'The Number is Five'];
 let usedWordsArray = [];
 let newWord = '';
 let testWord = '';
@@ -75,8 +75,10 @@ const handleInquirer = () => {
       ])
       .then(answers => {
         let userQuess = answers.userLetter;
+        // Convert word to lowercase 
+        let lowerCaseWord = newWord.toLowerCase();
         // Check user input against word
-        if (newWord.includes(userQuess)) {
+        if (lowerCaseWord.includes(userQuess)) {
           console.log(colors.green.bold('\nCORRECT'));
           console.log(colors.bold(`Number of wrong guesses remaining: ${quessesRemaining}\n`))
         } else {
