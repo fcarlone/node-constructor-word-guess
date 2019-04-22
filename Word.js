@@ -1,12 +1,10 @@
 const colors = require('colors/safe');
-// Requre Letter.js
 const Letter = require("./Letter.js");
 
 // Class Constructor
 class Word {
   constructor() {
     this.wordArray = [];
-
   }
   // Functions
   addChars(convertWord) {
@@ -25,16 +23,4 @@ class Word {
   }
 };
 
-module.exports = Word
-
-// TEST
-// let testWord = new Word('test');
-// testWord.addChars('test')
-
-// console.log(testWord.wordArray)
-// testWord.checkLetter('e')
-// testWord.checkLetter('t')
-// console.log(testWord.wordArray)
-
-// console.log(testWord)
-
+module.exports = Word;
