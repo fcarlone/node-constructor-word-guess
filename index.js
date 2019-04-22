@@ -152,13 +152,13 @@ const checkInquirerInput = (userGuess, lowerCaseWord) => {
 
 // Tally final score
 const finalScore = () => {
-  console.log("***************************************")
+  console.log("****************************************")
   console.log("*                                      *")
   console.log(`*  Characters Answered Correctly:   ${correctRepsonses}  *`);
   console.log("*                                      *")
   console.log(`*  Characters Answered Incorrectly: ${wrongResponses}  *`);
   console.log("*                                      *")
-  console.log("***************************************\n\n")
+  console.log("****************************************\n\n")
 };
 
 // Start application
