@@ -5,10 +5,10 @@
 
 ### Game Instructions:  
 > You are given five randomly selected Game of Thrones characters  
-> The charactor's name is hidden behind blank spaces  
-> Guess the charactor by selcting a letter    
-> You are allowed 10 incorrect guesses for each charactor  
-> Your final score appears after you complete answers the five characters    
+> The character's name is hidden behind blank spaces  
+> Guess the character's name by selectin a letter    
+> You are allowed 10 incorrect guesses for each character  
+> Your final score will appear after completing the five randomly selected characters 
 
 ### Install Game:  
 Clone the repository: [link to repository](https://github.com/fcarlone/node-constructor-word-guess/)  
@@ -18,11 +18,11 @@ Open your terminal and type the following command to start the game:
 <img src="assets/ss-index.png" height="26">  
 
 ### About the Game:  
-This is a Node.js application, using class contructors to create new instances of characters.
+This is a Node.js application, using class constructors to create new instances of characters.
 
 **Software/libraries used for this application:**  
 JavaScript - for the applications logic  
-Node.js - to exucute the application in the terminial (outside the browser)  
+Node.js - to execute the application in the terminal (outside the browser)  
 Inquirer.js - command-line user interface to prompt for and handle user input  
 colors.js - to style the Node.js application in the console  
 
