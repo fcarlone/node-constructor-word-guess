@@ -8,12 +8,12 @@
 > The charactor's name is hidden behind blank spaces  
 > Guess the charactor by selcting a letter    
 > You are allowed 10 incorrect guesses for each charactor  
-> Your final score appears when you complete after you complete the five charactors    
+> Your final score appears after you complete answers the five charactors    
 
 ### Install Game:  
 Clone the repository: [link to repository](https://github.com/fcarlone/node-constructor-word-guess/)  
 Install the packages associated with this application:  
- <img src="assets/ss-install.png" height="26">  
+ <img src="assets/ss-install-2.png" height="26">  
 Open your terminal and type the following command to start the game:  
 <img src="assets/ss-index.png" height="26">  
 
