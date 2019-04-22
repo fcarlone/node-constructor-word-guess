@@ -11,9 +11,9 @@
 > Your final score appears when you complete after you complete the five charactors    
 
 ### Install Game:  
-1. Clone the repository: [link to repository](https://github.com/fcarlone/node-constructor-word-guess/)  
+1. Clone the repository: [link to repository](https://github.com/fcarlone/node-constructor-word-guess/)
 2. Install the packages associated with this application:  
-<img src="assets/ss-install.png" height="26">  
+ <img src="assets/ss-install.png" height="26">  
 3. Open your terminal and type the following command to start the game:  
 <img src="assets/ss-index.png" height="26">  
 
