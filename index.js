@@ -8,6 +8,7 @@ const wordsArray =
     "Samwell Tarly", "Ygritte", "Robert Baratheon", "Gilly", "Tormund Giantsbane", "Grey Worm", "Yara Greyjoy", "Khal Drogo", "Hodor", "Missandei", "Beric Dondarrion", "Qyburn", "Osha", "Maester Aemon", "Tommen Baratheon",
     "Rickon Stark", "Lysa Arryn", "Robin Arryn", "Euron Greyjoy", "Lyanna Stark"];
 let usedWordsArray = [];
+let usedGuesses = [];
 let newWord = '';
 let testWord = '';
 let correctRepsonses = 0;
@@ -16,9 +17,9 @@ let questionNumber = 1;
 let guessRemaining = 10;
 
 // Instructions
-console.log(colors.bold("\n**** Guess the Game of Thrones Characters ****"));
+console.log(colors.bold("\n\n**** Guess the Game of Thrones Characters ****"));
 console.log(colors.bold("**** Answer Five Fill-in the Blanks Questions ****"));
-console.log(colors.bold("**** You are allowed 10 Incorrect Guesses for each Question ****\n"));
+console.log(colors.bold("**** You are allowed 10 Incorrect Guesses for each Character ****\n"));
 
 
 // Select a word from the wordsArray
@@ -40,6 +41,8 @@ const selectWord = (arr) => {
       // Ok to use the word
       // Reset the number of wrong guesses allowed
       guessRemaining = 10;
+      // Reset usedGusses array to blank array
+      usedGuesses = [];
       console.log(colors.bold.underline(`\nCharacter Number ${questionNumber}\n\n`));
       // Push the word into the usedWordsArray
       usedWordsArray.push(newWord);
@@ -57,7 +60,6 @@ const selectWord = (arr) => {
 // Inquirer
 const handleInquirer = () => {
   // Check the number of guesses left
-  console.log('guess count in Inquirer', guessRemaining);
   if (guessRemaining <= 0) {
     console.log("Message to user - no more guesses remaining");
     // Increase wrongResponses count by one
@@ -85,22 +87,25 @@ const handleInquirer = () => {
         let userGuess = answers.userLetter.toLowerCase();
         // Convert word to lowercase 
         let lowerCaseWord = newWord.toLowerCase();
-        // Check user input against word
-        if (lowerCaseWord.includes(userGuess)) {
-          console.log(colors.green.bold('\nCORRECT'));
-          console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
-        } else {
-          // decrement the number of remaining guesses
-          guessRemaining--
-          console.log('')
-          console.log(colors.red.bold('\nINCORRECT'));
-          console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
-        }
-        // Word constructor funcion checkLetter to display letter/underscore 
-        // and invoke Letter constructor function checkGuess to flip correctGuess property to "True"
-        testWord.checkLetter(userGuess)
-        // Invoke Inquirer - ask user to select a letter
-        return handleQuestion()
+
+        // Check if letter was already selected
+        checkInquirerInput(userGuess, lowerCaseWord);
+        // // Check user input against word
+        // if (lowerCaseWord.includes(userGuess)) {
+        //   console.log(colors.green.bold('\nCORRECT'));
+        //   console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
+        // } else {
+        //   // decrement the number of remaining guesses
+        //   guessRemaining--
+        //   console.log('')
+        //   console.log(colors.red.bold('\nINCORRECT'));
+        //   console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
+        // }
+        // // Word constructor funcion checkLetter to display letter/underscore 
+        // // and invoke Letter constructor function checkGuess to flip correctGuess property to "True"
+        // testWord.checkLetter(userGuess)
+        // // Invoke Inquirer - ask user to select a letter
+        // return handleQuestion()
       });
   }
 };
@@ -129,17 +134,51 @@ const handleQuestion = () => {
   };
 };
 
+// Check if user input was already used
+const checkInquirerInput = (userGuess, lowerCaseWord) => {
+  if (usedGuesses.includes(userGuess)) {
+    // // Push userGuess to usedGuesses array
+    // usedGuesses.push(userGuess)
+    console.log(colors.bold("You already selected that letter.  Select a different letter.\n"))
+    // Have user select another letter
+    handleInquirer();
+  } else {
+    // // Push userGuess to usedGuesses array
+    // usedGuesses.push(userGuess)
+    // Check user input against word
+    if (lowerCaseWord.includes(userGuess)) {
+      // Push userGuess to usedGuesses array
+      usedGuesses.push(userGuess)
+      console.log(colors.green.bold('\nCORRECT'));
+      console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
+    } else {
+      // decrement the number of remaining guesses
+      guessRemaining--
+      console.log('')
+      console.log(colors.red.bold('\nINCORRECT'));
+      console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
+    }
+    // Word constructor funcion checkLetter to display letter/underscore 
+    // and invoke Letter constructor function checkGuess to flip correctGuess property to "True"
+    testWord.checkLetter(userGuess)
+    // Invoke Inquirer - ask user to select a letter
+    handleQuestion()
+  }
+  // Push userGuess to usedGuesses array
+  usedGuesses.push(userGuess)
+}
+
 // Tally final score
 const finalScore = () => {
   console.log("***************************************")
   // console.log('invoke final score');
   // console.log('correctRepsonses count', correctRepsonses)
   // console.log('wrongResponses count', wrongResponses)
-  console.log("*                                     *")
+  console.log("*                                      *")
   console.log(`*  Characters Answered Correctly:   ${correctRepsonses}  *`);
-  console.log("*                                     *")
+  console.log("*                                      *")
   console.log(`*  Characters Answered Incorrectly: ${wrongResponses}  *`);
-  console.log("*                                     *")
+  console.log("*                                      *")
   console.log("***************************************\n\n")
 };
 
