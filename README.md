@@ -4,11 +4,11 @@
 ## Open your terminal and play this Game of Thrones theme fill-in the blank game
 
 ### Game Instructions:  
-> You are given five randomly selected Game of Thrones charactors  
+> You are given five randomly selected Game of Thrones characters  
 > The charactor's name is hidden behind blank spaces  
 > Guess the charactor by selcting a letter    
 > You are allowed 10 incorrect guesses for each charactor  
-> Your final score appears after you complete answers the five charactors    
+> Your final score appears after you complete answers the five characters    
 
 ### Install Game:  
 Clone the repository: [link to repository](https://github.com/fcarlone/node-constructor-word-guess/)  
