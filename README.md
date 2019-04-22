@@ -13,7 +13,7 @@
 ### Install Game:  
 Clone the repository: [link to repository](https://github.com/fcarlone/node-constructor-word-guess/)  
 Install the packages associated with this application:  
- <img src="assets/ss-install-2.png" height="26">  
+ <img src="assets/ss-install-2.png" height="22">  
 Open your terminal and type the following command to start the game:  
 <img src="assets/ss-index.png" height="26">  
 
