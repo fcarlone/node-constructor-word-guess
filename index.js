@@ -2,7 +2,11 @@ const Word = require('./Word.js');
 const inquirer = require('inquirer');
 const colors = require('colors/safe');
 
-const wordsArray = ['One', 'Second', 'Three', 'Number Four', 'The Number is Five'];
+const wordsArray =
+  ["Tyrion Lannister", "Daenerys Targaryen", "Jon Snow", "Cersei Lannister", "Arya Stark", "Jaime Lannister", "Eddard Stark", "Tywin Lannister", "Varys", "Catelyn Stark", "Sansa Stark", "Davos Seaworth", "Brienne of Tarth",
+    "Petyr Baelish", "Joffrey Baratheon", "Bran Stark", "Sandor Clegane", "Melisandre", "Theon Greyjoy", "Bronn", "Margaery Tyrell", "Jorah Mormont", "Olenna Tyrell", "Ramsay Bolton", "Robb Stark", "Walder Frey",
+    "Samwell Tarly", "Ygritte", "Robert Baratheon", "Gilly", "Tormund Giantsbane", "Grey Worm", "Yara Greyjoy", "Khal Drogo", "Hodor", "Missandei", "Beric Dondarrion", "Qyburn", "Osha", "Maester Aemon", "Tommen Baratheon",
+    "Rickon Stark", "Lysa Arryn", "Robin Arryn", "Euron Greyjoy", "Lyanna Stark"];
 let usedWordsArray = [];
 let newWord = '';
 let testWord = '';
@@ -11,12 +15,16 @@ let wrongResponses = 0;
 let questionNumber = 1;
 let guessRemaining = 10;
 
-console.log(colors.bold("\n\n**** Answer Three Questions ****"));
+// Instructions
+console.log(colors.bold("\n**** Guess the Game of Thrones Characters ****"));
+console.log(colors.bold("**** Answer Five Fill-in the Blanks Questions ****"));
+console.log(colors.bold("**** You are allowed 10 Incorrect Guesses for each Question ****\n"));
+
 
 // Select a word from the wordsArray
 const selectWord = (arr) => {
   // Check questions count 
-  if (questionNumber > 3) {
+  if (questionNumber > 5) {
     // Three questions was submitted - tally results;
     console.log(colors.bold('\n  ALL DONE. HERE IS YOUR FINAL SCORE.\n'));
     finalScore();
@@ -32,7 +40,7 @@ const selectWord = (arr) => {
       // Ok to use the word
       // Reset the number of wrong guesses allowed
       guessRemaining = 10;
-      console.log(colors.bold.underline(`\nQuestion Number ${questionNumber}\n\n`));
+      console.log(colors.bold.underline(`\nCharacter Number ${questionNumber}\n\n`));
       // Push the word into the usedWordsArray
       usedWordsArray.push(newWord);
       // Word constructor
@@ -128,12 +136,14 @@ const finalScore = () => {
   // console.log('correctRepsonses count', correctRepsonses)
   // console.log('wrongResponses count', wrongResponses)
   console.log("*                                     *")
-  console.log(`*  Questions Answered Correctly:   ${correctRepsonses}  *`);
+  console.log(`*  Characters Answered Correctly:   ${correctRepsonses}  *`);
   console.log("*                                     *")
-  console.log(`*  Questions Answered Incorrectly: ${wrongResponses}  *`);
+  console.log(`*  Characters Answered Incorrectly: ${wrongResponses}  *`);
   console.log("*                                     *")
   console.log("***************************************\n\n")
 };
 
 // Start application
 selectWord(wordsArray)
+
+
