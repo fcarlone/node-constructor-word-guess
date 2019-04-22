@@ -1,5 +1,5 @@
 
-# <img src="assets/icon-stark.png" alt="🐺" width="32"/> Guess the Game of Thrones Character <img src="assets/icon-stark.png" alt="🐺" width="32"/>
+# <img src="assets/icon-stark.png" alt="🐺" width="32"/>  Guess the Game of Thrones Character  <img src="assets/icon-stark.png" alt="🐺" width="32"/>
 
 ## Open your terminal and play this Game of Thrones theme fill-in the blank game
 
@@ -12,10 +12,10 @@
 
 ### Install Game:  
 1. Clone the repository: [link to repository](https://github.com/fcarlone/node-constructor-word-guess/)  
-2. Install the packages associated with this application  
-<img src="assets/ss-install.png" height="30">  
+2. Install the packages associated with this application:  
+<img src="assets/ss-install.png" height="26">  
 3. Open your terminal and type the following command to start the game:  
-<img src="assets/ss-install.png" height="30">  
+<img src="assets/ss-index.png" height="26">  
 
 ### About the Game:  
 This is a Node.js application, using class contructors to create new instances of characters.
