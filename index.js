@@ -9,7 +9,7 @@ let testWord = '';
 let correctRepsonses = 0;
 let wrongResponses = 0;
 let questionNumber = 1;
-let quessesRemaining = 10;
+let guessRemaining = 10;
 
 console.log(colors.bold("\n\n**** Answer Three Questions ****"));
 
@@ -31,7 +31,7 @@ const selectWord = (arr) => {
     } else {
       // Ok to use the word
       // Reset the number of wrong guesses allowed
-      quessesRemaining = 10;
+      guessRemaining = 10;
       console.log(colors.bold.underline(`\nQuestion Number ${questionNumber}\n\n`));
       // Push the word into the usedWordsArray
       usedWordsArray.push(newWord);
@@ -49,8 +49,8 @@ const selectWord = (arr) => {
 // Inquirer
 const handleInquirer = () => {
   // Check the number of guesses left
-  console.log('guess count in Inquirer', quessesRemaining);
-  if (quessesRemaining <= 0) {
+  console.log('guess count in Inquirer', guessRemaining);
+  if (guessRemaining <= 0) {
     console.log("Message to user - no more guesses remaining");
     // Increase wrongResponses count by one
     wrongResponses += 1;
@@ -74,23 +74,23 @@ const handleInquirer = () => {
         }
       ])
       .then(answers => {
-        let userQuess = answers.userLetter.toLowerCase();
+        let userGuess = answers.userLetter.toLowerCase();
         // Convert word to lowercase 
         let lowerCaseWord = newWord.toLowerCase();
         // Check user input against word
-        if (lowerCaseWord.includes(userQuess)) {
+        if (lowerCaseWord.includes(userGuess)) {
           console.log(colors.green.bold('\nCORRECT'));
-          console.log(colors.bold(`Number of wrong guesses remaining: ${quessesRemaining}\n`))
+          console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
         } else {
           // decrement the number of remaining guesses
-          quessesRemaining--
+          guessRemaining--
           console.log('')
           console.log(colors.red.bold('\nINCORRECT'));
-          console.log(colors.bold(`Number of wrong guesses remaining: ${quessesRemaining}\n`))
+          console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
         }
         // Word constructor funcion checkLetter to display letter/underscore 
         // and invoke Letter constructor function checkGuess to flip correctGuess property to "True"
-        testWord.checkLetter(userQuess)
+        testWord.checkLetter(userGuess)
         // Invoke Inquirer - ask user to select a letter
         return handleQuestion()
       });
@@ -137,15 +137,3 @@ const finalScore = () => {
 
 // Start application
 selectWord(wordsArray)
-
-
-// let checkWord = new Word();
-
-// console.log(checkWord.addChars(newWord))
-
-
-// checkWord.checkLetter('e')
-// console.log('-----------')
-// checkWord.checkLetter('r')
-// console.log('-----------')
-// checkWord.checkLetter('n')
