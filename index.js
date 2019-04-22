@@ -2,11 +2,10 @@ const Word = require('./Word.js');
 const inquirer = require('inquirer');
 const colors = require('colors/safe');
 
-const wordsArray =
-  ["Tyrion Lannister", "Daenerys Targaryen", "Jon Snow", "Cersei Lannister", "Arya Stark", "Jaime Lannister", "Eddard Stark", "Tywin Lannister", "Varys", "Catelyn Stark", "Sansa Stark", "Davos Seaworth", "Brienne of Tarth",
-    "Petyr Baelish", "Joffrey Baratheon", "Bran Stark", "Sandor Clegane", "Melisandre", "Theon Greyjoy", "Bronn", "Margaery Tyrell", "Jorah Mormont", "Olenna Tyrell", "Ramsay Bolton", "Robb Stark", "Walder Frey",
-    "Samwell Tarly", "Ygritte", "Robert Baratheon", "Gilly", "Tormund Giantsbane", "Grey Worm", "Yara Greyjoy", "Khal Drogo", "Hodor", "Missandei", "Beric Dondarrion", "Qyburn", "Osha", "Maester Aemon", "Tommen Baratheon",
-    "Rickon Stark", "Lysa Arryn", "Robin Arryn", "Euron Greyjoy", "Lyanna Stark"];
+const wordsArray = ["Tyrion Lannister", "Daenerys Targaryen", "Jon Snow", "Cersei Lannister", "Arya Stark", "Jaime Lannister", "Eddard Stark", "Tywin Lannister", "Varys", "Catelyn Stark", "Sansa Stark", "Davos Seaworth", "Brienne of Tarth",
+  "Petyr Baelish", "Joffrey Baratheon", "Bran Stark", "Sandor Clegane", "Melisandre", "Theon Greyjoy", "Bronn", "Margaery Tyrell", "Jorah Mormont", "Olenna Tyrell", "Ramsay Bolton", "Robb Stark", "Walder Frey",
+  "Samwell Tarly", "Ygritte", "Robert Baratheon", "Gilly", "Tormund Giantsbane", "Grey Worm", "Yara Greyjoy", "Khal Drogo", "Hodor", "Missandei", "Beric Dondarrion", "Qyburn", "Maester Aemon", "Tommen Baratheon",
+  "Rickon Stark", "Lysa Arryn", "Robin Arryn", "Euron Greyjoy", "Lyanna Stark"];
 let usedWordsArray = [];
 let usedGuesses = [];
 let newWord = '';
@@ -21,13 +20,12 @@ console.log(colors.bold("\n\n**** Guess the Game of Thrones Characters ****"));
 console.log(colors.bold("**** Answer Five Fill-in the Blanks Questions ****"));
 console.log(colors.bold("**** You are allowed 10 Incorrect Guesses for each Character ****\n"));
 
-
 // Select a word from the wordsArray
 const selectWord = (arr) => {
   // Check questions count 
   if (questionNumber > 5) {
     // Three questions was submitted - tally results;
-    console.log(colors.bold('\n  ALL DONE. HERE IS YOUR FINAL SCORE.\n'));
+    console.log(colors.bold.blue('\n  ALL DONE. HERE IS YOUR FINAL SCORE.\n'));
     finalScore();
   } else {
     // Select random word from wordsArray
@@ -61,7 +59,7 @@ const selectWord = (arr) => {
 const handleInquirer = () => {
   // Check the number of guesses left
   if (guessRemaining <= 0) {
-    console.log("Message to user - no more guesses remaining");
+    console.log(colors.bold.red("*** No more wrong guesses allowed. ***"));
     // Increase wrongResponses count by one
     wrongResponses += 1;
     // Increase questions count by one
@@ -87,25 +85,8 @@ const handleInquirer = () => {
         let userGuess = answers.userLetter.toLowerCase();
         // Convert word to lowercase 
         let lowerCaseWord = newWord.toLowerCase();
-
-        // Check if letter was already selected
+        // Check if letter was already selected and if letter is correct or incorrect
         checkInquirerInput(userGuess, lowerCaseWord);
-        // // Check user input against word
-        // if (lowerCaseWord.includes(userGuess)) {
-        //   console.log(colors.green.bold('\nCORRECT'));
-        //   console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
-        // } else {
-        //   // decrement the number of remaining guesses
-        //   guessRemaining--
-        //   console.log('')
-        //   console.log(colors.red.bold('\nINCORRECT'));
-        //   console.log(colors.bold(`Number of wrong guesses remaining: ${guessRemaining}\n`))
-        // }
-        // // Word constructor funcion checkLetter to display letter/underscore 
-        // // and invoke Letter constructor function checkGuess to flip correctGuess property to "True"
-        // testWord.checkLetter(userGuess)
-        // // Invoke Inquirer - ask user to select a letter
-        // return handleQuestion()
       });
   }
 };
@@ -137,14 +118,11 @@ const handleQuestion = () => {
 // Check if user input was already used
 const checkInquirerInput = (userGuess, lowerCaseWord) => {
   if (usedGuesses.includes(userGuess)) {
-    // // Push userGuess to usedGuesses array
-    // usedGuesses.push(userGuess)
-    console.log(colors.bold("You already selected that letter.  Select a different letter.\n"))
+    console.log(colors.bold("You already selected that letter.  Select a different letter."));
+    console.log(colors.bold(`Letter(s) previously selected: ${usedGuesses.join(', ')}\n`))
     // Have user select another letter
-    handleInquirer();
+    // handleInquirer();
   } else {
-    // // Push userGuess to usedGuesses array
-    // usedGuesses.push(userGuess)
     // Check user input against word
     if (lowerCaseWord.includes(userGuess)) {
       // Push userGuess to usedGuesses array
@@ -162,18 +140,19 @@ const checkInquirerInput = (userGuess, lowerCaseWord) => {
     // and invoke Letter constructor function checkGuess to flip correctGuess property to "True"
     testWord.checkLetter(userGuess)
     // Invoke Inquirer - ask user to select a letter
-    handleQuestion()
+    // handleQuestion()
   }
   // Push userGuess to usedGuesses array
-  usedGuesses.push(userGuess)
-}
+  if (!usedGuesses.includes(userGuess)) {
+    usedGuesses.push(userGuess)
+  };
+  // Have user select another letter or move to next question
+  handleQuestion();
+};
 
 // Tally final score
 const finalScore = () => {
   console.log("***************************************")
-  // console.log('invoke final score');
-  // console.log('correctRepsonses count', correctRepsonses)
-  // console.log('wrongResponses count', wrongResponses)
   console.log("*                                      *")
   console.log(`*  Characters Answered Correctly:   ${correctRepsonses}  *`);
   console.log("*                                      *")
