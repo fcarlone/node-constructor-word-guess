@@ -28,3 +28,4 @@ colors.js - to style the Node.js application in the console
 
 
 ### Video Demo:
+[![Watch the video](assets/ss-app.png)](https://drive.google.com/file/d/1trJV8qUjIvsVLAehACw1_NzM3rMd7kq2/view)
