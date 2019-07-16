@@ -21,7 +21,7 @@ Open your terminal and type the following command to start the game:
 This is a Node.js application, using class constructors to create new instances of characters.
 
 **Software/libraries used for this application:**  
-JavaScript - for the applications logic  
+JavaScript - for application logic  
 Node.js - to execute the application in the terminal (outside the browser)  
 Inquirer.js - command-line user interface to prompt for and handle user input  
 colors.js - to style the Node.js application in the console  
